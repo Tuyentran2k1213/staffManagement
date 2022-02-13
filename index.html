@@ -15,8 +15,17 @@
 
     <link rel="stylesheet" href="./css/index.css">
   <body>
+<div class="container mt-5">
 
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap">Open modal for @getbootstrap</button>
+
+
+
+<div class="header-title pt-2 pb-3 d-flex">
+  <h2 class="text-primary font-weight-bold">
+    Danh sách nhân viên
+  </h2>
+  <button type="button" class="btn btn-primary ml-auto pt-2 pb-2 h-100" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap">Thêm nhân viên</button>
+</div>
 
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -75,7 +84,7 @@
             </select>
           </div>
           <div class="modal-footer">
-            <button type="submit" class="btn btn-success">Thêm người dùng</button>
+            <button type="submit" id="addMore" class="btn btn-success">Thêm người dùng</button>
             <button type="button" class="btn btn-danger" data-dismiss="modal">Đóng</button>
           </div>
         </form>
@@ -84,47 +93,37 @@
   </div>
 </div>
 
-<div class="table">
+<div class="table mt-4">
+  <div class="input-group mb-3">
+    <input type="text" class="form-control pt-4 pb-4" placeholder="Tên nhân viên" aria-label="Recipient's username" aria-describedby="button-addon2">
+    <div class="input-group-append">
+      <button class="btn btn-outline-secondary pr-4 pl-4 input-group-text" type="button" id="button-addon2"><i class="fa fa-search"></i></button>
+    </div>
+  </div>
   <table class="rwd-table">
     <thead>
       <tr>
-        <th>Movie Title</th>
-        <th>Genre</th>
-        <th>Year</th>
-        <th>Gross</th>
-        <th>Year</th>
-        <th>Gross</th>
+        <th>Mã Nhân viên</th>
+        <th>Học và tên nhân viên</th>
+        <th>Email</th>
+        <th>Ngày Sinh</th>
+        <th>Chức vụ</th>
+        <th><i class="fa fa-cog"></i></th>
       </tr>
     </thead>
-    <tbody id="bodyTable">
-      <tr>
-        <td data-th="Movie Title">Star Wars</td>
-        <td data-th="Genre">Adventure, Sci-fi</td>
-        <td data-th="Year">1977</td>
-        <td data-th="Gross">$460,935,665</td>
-        <td data-th="Year">1977</td>
-        <td data-th="Gross">$460,935,665</td>
-      </tr>
-      <tr>
-        <td data-th="Movie Title">Howard The Duck</td>
-        <td data-th="Genre">"Comedy"</td>
-        <td data-th="Year">1986</td>
-        <td data-th="Gross">$16,295,774</td>
-      </tr>
-      <tr>
-        <td data-th="Movie Title">American Graffiti</td>
-        <td data-th="Genre">Comedy, Drama</td>
-        <td data-th="Year">1973</td>
-        <td data-th="Gross">$115,000,000</td>
-      </tr>
-    </tbody>
+    <tbody id="bodyTable"></tbody>
   </table>
+</div>
+
+
+
 </div>
       
     <!-- Optional JavaScript -->
-    <script src="./js/main.js"></script>
-
+    <script src="./js/validate.js"></script>
+    <script src="./js/staff.js"></script>
     <script>
+      var dataStaff;
       validator({
         form: "#form-validate",
         errorSelector: ".form-message",
@@ -140,10 +139,15 @@
           validator.isEmail('#email'),
         ],
         onSubmit: function(data){
-          console.log(data);
+          var staffData = new Staff(data.Id, data.Name, data.Email, data.Pass, data.Date, data.rank);
+          dataStaff = staffData;
+          console.log(dataStaff);
         }
       })
     </script>
+
+    
+    <script src="./js/manager.js"></script>
 
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
