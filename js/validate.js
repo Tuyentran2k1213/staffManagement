@@ -1,4 +1,3 @@
-// Viết mã JS tại đây
 
 // validator constructor 
 function validator(options){
@@ -31,7 +30,6 @@ function validator(options){
     var formElement = $(options.form);
 
     //submit event
-
     formElement.onsubmit = function(e){
         e.preventDefault();
 
@@ -58,8 +56,9 @@ function validator(options){
                 return (values[input.name] = input.value) && values;
         }, {});
         options.onSubmit(formValue);
-                   function manager(){
 
+            // staff management function 
+                   function manager(){
                     function addStaff(){
                         var staffData = new Staff(formValue.Id, formValue.Name, formValue.Email, formValue.Pass, formValue.Date, formValue.rank);
                         if(findfStaffbyId(staffData.idsta) == -1){
@@ -71,6 +70,7 @@ function validator(options){
                          Liststaff[index] = new Staff(formValue.Id, formValue.Name, formValue.Email, formValue.Pass, formValue.Date, formValue.rank);
                          render(Liststaff);
                         }
+                        saveData();
                     }
                     addStaff();
                     }

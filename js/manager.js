@@ -1,14 +1,28 @@
 const $ = document.querySelector.bind(document);
 const $$ = document.querySelectorAll.bind(document);
 
-const find = $('.btn.btn-outline-secondary.pr-4.pl-4.input-group-text');
+// get input name element
 const inputFind = $('.form-control.pt-4.pb-4');
 
-const table = $('#bodyTable');
+// get button click element
+const find = $('.btn.btn-outline-secondary.pr-4.pl-4.input-group-text');
 const addMore_btn = $('#addMore');
 const changeToEnable = $('.changeToEnable');
+
+//render information's place on the screen
+const table = $('#bodyTable');
+
+//shared variables
 var Liststaff = [];
 var isDisable = false;
+
+//save and render data
+var strData = localStorage.getItem('raw');
+var data = JSON.parse(strData);
+if(data){
+    Liststaff = data;
+    render(Liststaff);
+}
 
 
 function findfStaffbyId(list){
@@ -48,6 +62,7 @@ function dele(id){
     if(index != -1){
         Liststaff.splice(index, 1);
     }
+    saveData();
     render(Liststaff)
 }
 
@@ -87,14 +102,16 @@ for(var i = 0; i < staffs.length; ++i){
 
   table.innerHTML = HTMLtext;
 }
-// function saveData(){
-//     var 
-// }
 
+function saveData(){
+    var rawData = JSON.stringify(Liststaff);
+    localStorage.setItem('raw', rawData);
+}
+
+//onclick even
 changeToEnable.onclick = function(){
     isDisable = false;
     disableInput(isDisable);
 }
-
 find.parentElement.onclick = function(){findName();
 }
