@@ -62,10 +62,16 @@ function validator(options){
 
                     function addStaff(){
                         var staffData = new Staff(formValue.Id, formValue.Name, formValue.Email, formValue.Pass, formValue.Date, formValue.rank);
+                        if(findfStaffbyId(staffData.idsta) == -1){
                             Liststaff.push(staffData);
                             render(Liststaff);
+                        } 
+                        if(findfStaffbyId(staffData.idsta) != -1){
+                         var index = findfStaffbyId(staffData.idsta);
+                         Liststaff[index] = new Staff(formValue.Id, formValue.Name, formValue.Email, formValue.Pass, formValue.Date, formValue.rank);
+                         render(Liststaff);
+                        }
                     }
-                
                     addStaff();
                     }
                 

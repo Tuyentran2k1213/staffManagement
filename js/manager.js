@@ -1,8 +1,14 @@
 const $ = document.querySelector.bind(document);
 const $$ = document.querySelectorAll.bind(document);
+
+const find = $('.btn.btn-outline-secondary.pr-4.pl-4.input-group-text');
+const inputFind = $('.form-control.pt-4.pb-4');
+
 const table = $('#bodyTable');
 const addMore_btn = $('#addMore');
+const changeToEnable = $('.changeToEnable');
 var Liststaff = [];
+var isDisable = false;
 
 
 function findfStaffbyId(list){
@@ -18,12 +24,47 @@ function findfStaffbyId(list){
     return index;
 }
 
+function findfStaffbyName(){
+    var name = inputFind.value;
+    var index = [];
+    for(i = 0; i < Liststaff.length; ++i){
+        if(Liststaff[i].namesta == name){
+            index.push(i);
+        }
+    }
+    return index;
+}
+
+function findName(){
+    var nameIndex = findfStaffbyName();
+    if(nameIndex.length > 0){
+        var ListNamestaff = nameIndex.map((named) => Liststaff[named]);
+    }
+    render(ListNamestaff);
+}
+
 function dele(id){
     var index = findfStaffbyId(id);
     if(index != -1){
         Liststaff.splice(index, 1);
     }
     render(Liststaff)
+}
+
+function edit(){
+    isDisable = true;
+    disableInput(isDisable);
+}
+
+function disableInput(value){
+    if(value){
+        addMore_btn.innerText = `Sửa thông tin`;
+        $('#Id').disabled = true;
+    } else{
+        addMore_btn.innerText = `Thêm người dùng`;
+        $('#Id').disabled = false;
+    }
+    
 }
 
 function render(staffss){
@@ -38,11 +79,22 @@ for(var i = 0; i < staffs.length; ++i){
     <td data-th="Gross">${staff.birthsta}</td>
     <td data-th="Year">${staff.possta}</td>
     <td data-th="Gross">
-      <button type="button" onclick="edit('${staff.idsta}')" class="btn btn-info" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap">Edit</button>
+      <button type="button" onclick="edit()" class="btn btn-info" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap">Edit</button>
       <button type="button" onclick="dele('${staff.idsta}')" class="btn btn-danger">Delete</button>
     </td>
   </tr>`;
 }
 
   table.innerHTML = HTMLtext;
+}
+// function saveData(){
+//     var 
+// }
+
+changeToEnable.onclick = function(){
+    isDisable = false;
+    disableInput(isDisable);
+}
+
+find.parentElement.onclick = function(){findName();
 }
