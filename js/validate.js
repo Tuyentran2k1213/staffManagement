@@ -1,8 +1,5 @@
 // Viết mã JS tại đây
 
-const $ = document.querySelector.bind(document);
-const $$ = document.querySelectorAll.bind(document);
-
 // validator constructor 
 function validator(options){
 
@@ -34,6 +31,7 @@ function validator(options){
     var formElement = $(options.form);
 
     //submit event
+
     formElement.onsubmit = function(e){
         e.preventDefault();
 
@@ -59,10 +57,20 @@ function validator(options){
                 var formValue = Array.from(enableInputs).reduce(function(values, input){
                 return (values[input.name] = input.value) && values;
         }, {});
-                options.onSubmit(formValue);
+        options.onSubmit(formValue);
+                   function manager(){
+
+                    function addStaff(){
+                        var staffData = new Staff(formValue.Id, formValue.Name, formValue.Email, formValue.Pass, formValue.Date, formValue.rank);
+                            Liststaff.push(staffData);
+                            render(Liststaff);
+                    }
+                
+                    addStaff();
+                    }
+                
+                manager();
             }
-        } else{
-            
         }
     }
 

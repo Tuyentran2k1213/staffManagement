@@ -120,10 +120,11 @@
 </div>
       
     <!-- Optional JavaScript -->
-    <script src="./js/validate.js"></script>
     <script src="./js/staff.js"></script>
+    <script src="./js/manager.js"></script>
+    <script src="./js/validate.js"></script>
+    
     <script>
-      var dataStaff;
       validator({
         form: "#form-validate",
         errorSelector: ".form-message",
@@ -138,16 +139,10 @@
           validator.minLength('#pass', 5, 15),
           validator.isEmail('#email'),
         ],
-        onSubmit: function(data){
-          var staffData = new Staff(data.Id, data.Name, data.Email, data.Pass, data.Date, data.rank);
-          dataStaff = staffData;
-          console.log(dataStaff);
-        }
+        onSubmit: function(data){}
       })
     </script>
 
-    
-    <script src="./js/manager.js"></script>
 
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
