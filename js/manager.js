@@ -66,7 +66,10 @@ function dele(id){
     render(Liststaff)
 }
 
-function edit(){
+function edit(value){
+    var index = findfStaffbyId(value);
+    var inputValue = Liststaff[index].idsta;
+    $('#Id').value = inputValue;
     isDisable = true;
     disableInput(isDisable);
 }
@@ -94,7 +97,7 @@ for(var i = 0; i < staffs.length; ++i){
     <td data-th="Gross">${staff.birthsta}</td>
     <td data-th="Year">${staff.possta}</td>
     <td data-th="Gross">
-      <button type="button" onclick="edit()" class="btn btn-info" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap">Edit</button>
+      <button type="button" onclick="edit(${staff.idsta})" class="btn btn-info" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap">Edit</button>
       <button type="button" onclick="dele('${staff.idsta}')" class="btn btn-danger">Delete</button>
     </td>
   </tr>`;
